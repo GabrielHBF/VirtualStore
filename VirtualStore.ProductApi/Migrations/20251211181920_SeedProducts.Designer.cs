@@ -10,7 +10,7 @@ using VirtualStore.ProductApi.Context;
 
 namespace VirtualStore.ProductApi.Migrations
 {
-    [DbContext(typeof(AppDbContextcs))]
+    [DbContext(typeof(Context.AppDbContext))]
     [Migration("20251211181920_SeedProducts")]
     partial class SeedProducts
     {

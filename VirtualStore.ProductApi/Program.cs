@@ -1,5 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 using VirtualStore.ProductApi.Context;
+using VirtualStore.ProductApi.Repositories.Categories;
+using VirtualStore.ProductApi.Repositories.Products;
+using VirtualStore.ProductApi.Services.Interfaces;
+using VirtualStore.ProductApi.Services.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +15,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<AppDbContextcs>(options =>
+
+builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryServices>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 

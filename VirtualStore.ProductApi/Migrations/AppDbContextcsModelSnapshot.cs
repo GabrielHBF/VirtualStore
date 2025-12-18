@@ -9,7 +9,7 @@ using VirtualStore.ProductApi.Context;
 
 namespace VirtualStore.ProductApi.Migrations
 {
-    [DbContext(typeof(AppDbContextcs))]
+    [DbContext(typeof(Context.AppDbContext))]
     partial class AppDbContextcsModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

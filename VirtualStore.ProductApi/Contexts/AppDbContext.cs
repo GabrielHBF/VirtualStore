@@ -2,9 +2,9 @@
 using VirtualStore.ProductApi.Model;
 
 namespace VirtualStore.ProductApi.Context;
-public class AppDbContextcs : DbContext
+public class AppDbContext : DbContext
 {
-    public AppDbContextcs(DbContextOptions<AppDbContextcs> options) : base(options)
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }
 
