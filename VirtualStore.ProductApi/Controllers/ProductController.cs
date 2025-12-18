@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VirtualStore.ProductApi.DTOs;
+using VirtualStore.ProductApi.Services.Interfaces;
 using VirtualStore.ProductApi.Services.Service;
 
 namespace VirtualStore.ProductApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController(ProductService productService) : ControllerBase
+    public class ProductController(IProductService productService) : ControllerBase
     {
-        public readonly ProductService _productService = productService;
+        public readonly IProductService _productService = productService;
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAllProducts()

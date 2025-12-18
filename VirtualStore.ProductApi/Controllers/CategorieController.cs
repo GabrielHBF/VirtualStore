@@ -16,7 +16,7 @@ namespace VirtualStore.ProductApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoryDTO>>> GetCategories()
         {
-            var result = _categoryService.GetAll();
+            var result = await _categoryService.GetAll();
             if (result is null)
             {
                 return NotFound("Categories not fond");

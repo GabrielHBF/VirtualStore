@@ -10,17 +10,17 @@ namespace VirtualStore.ProductApi.Services.Service
         private readonly IProductRepository _productRepository = productRepository;
         private readonly IMapper _mapper = mapper;
 
-        public Task<ProductDTO> CreateAsync(ProductDTO productDto)
+        public async Task<ProductDTO> CreateAsync(ProductDTO productDto)
         {
            var productEntity = _mapper.Map<Model.Product>(productDto);
-           var createdProduct = _productRepository.CreateProductAsync(productEntity);
-           return _mapper.Map<Task<ProductDTO>>(createdProduct);
+           var createdProduct = await _productRepository.CreateProductAsync(productEntity);
+           return _mapper.Map<ProductDTO>(createdProduct);
         }
 
-        public Task<ProductDTO> DeleteAsync(int id)
+        public async Task<ProductDTO> DeleteAsync(int id)
         {
-            var deletedProduct = _productRepository.DeleteProductAsync(id);
-            return _mapper.Map<Task<ProductDTO>>(deletedProduct);
+            var deletedProduct =await  _productRepository.DeleteProductAsync(id);
+            return _mapper.Map<ProductDTO>(deletedProduct);
         }
 
         public async Task<IEnumerable<ProductDTO>> GetAllAsync()
@@ -36,11 +36,11 @@ namespace VirtualStore.ProductApi.Services.Service
             return _mapper.Map<ProductDTO>(product);
         }
 
-        public Task<ProductDTO> UpdateAsync(ProductDTO productDto)
+        public async Task<ProductDTO> UpdateAsync(ProductDTO productDto)
         {
             var productEntity = _mapper.Map<Model.Product>(productDto);
-            var updatedProduct = _productRepository.UpdateProductAsync(productEntity);
-            return _mapper.Map<Task<ProductDTO>>(updatedProduct);
+            var updatedProduct = await _productRepository.UpdateProductAsync(productEntity);
+            return _mapper.Map<ProductDTO>(updatedProduct);
         }
     }
 }
