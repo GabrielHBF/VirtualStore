@@ -1,4 +1,4 @@
-﻿using VirtualStore.ProductApi.Model;
+﻿using VirtualStore.ProductApi.Entities;
 
 namespace VirtualStore.ProductApi.Repositories.Products;
 

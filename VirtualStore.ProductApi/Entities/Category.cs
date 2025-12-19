@@ -1,4 +1,6 @@
-﻿namespace VirtualStore.ProductApi.Model;
+﻿using VirtualStore.ProductApi.Entities;
+
+namespace VirtualStore.ProductApi.Model;
 
 public class Category
 {

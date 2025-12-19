@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VirtualStore.ProductApi.Context;
-using VirtualStore.ProductApi.Model;
+using VirtualStore.ProductApi.Entities;
 
 namespace VirtualStore.ProductApi.Repositories.Products
 {
@@ -29,12 +29,12 @@ namespace VirtualStore.ProductApi.Repositories.Products
 
         public async Task<IEnumerable<Product>> GetAllProductsAsync()
         {
-            return await _context.Products.ToListAsync();
+            return await _context.Products.Include(c => c.Category).ToListAsync();
         }
 
         public async Task<Product> GetProductByIdAsync(int id)
         {
-           return await _context.Products.Where(p => p.Id == id).FirstOrDefaultAsync();
+           return await _context.Products.Include(c => c.Category).Where(p => p.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<Product> UpdateProductAsync(Product product)

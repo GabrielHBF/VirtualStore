@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using VirtualStore.ProductApi.Model;
+using VirtualStore.ProductApi.Entities;
 
 namespace VirtualStore.ProductApi.DTOs
 {

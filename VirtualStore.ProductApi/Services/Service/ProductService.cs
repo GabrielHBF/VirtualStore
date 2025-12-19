@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using VirtualStore.ProductApi.DTOs;
+using VirtualStore.ProductApi.Entities;
 using VirtualStore.ProductApi.Repositories.Products;
 using VirtualStore.ProductApi.Services.Interfaces;
 
@@ -12,7 +13,7 @@ namespace VirtualStore.ProductApi.Services.Service
 
         public async Task<ProductDTO> CreateAsync(ProductDTO productDto)
         {
-           var productEntity = _mapper.Map<Model.Product>(productDto);
+           var productEntity = _mapper.Map<Product>(productDto);
            var createdProduct = await _productRepository.CreateProductAsync(productEntity);
            return _mapper.Map<ProductDTO>(createdProduct);
         }
@@ -38,7 +39,7 @@ namespace VirtualStore.ProductApi.Services.Service
 
         public async Task<ProductDTO> UpdateAsync(ProductDTO productDto)
         {
-            var productEntity = _mapper.Map<Model.Product>(productDto);
+            var productEntity = _mapper.Map<Product>(productDto);
             var updatedProduct = await _productRepository.UpdateProductAsync(productEntity);
             return _mapper.Map<ProductDTO>(updatedProduct);
         }
