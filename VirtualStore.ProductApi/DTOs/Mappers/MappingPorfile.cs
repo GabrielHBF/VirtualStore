@@ -7,9 +7,12 @@ public class MappingPorfile : Profile
 {
     public MappingPorfile()
     {
-        CreateMap<Product, ProductDTO>();
+        CreateMap<Product, ProductDTO>()
+        .ForMember(dest => dest.CategoryName,
+        opt => opt.MapFrom(src => src.Category.Name));
 
-        CreateMap<Product, ProductDTO>().ForMember(X => X.CategoryName, opt => opt.MapFrom(x => x.Category!.Name));
+        CreateMap<ProductDTO, Product>()
+        .ForMember(dest => dest.Category, opt => opt.Ignore());
 
         CreateMap<Model.Category, CategoryDTO>().ReverseMap();
     }

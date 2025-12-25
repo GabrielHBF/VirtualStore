@@ -13,9 +13,14 @@ namespace VirtualStore.ProductApi.Services.Service
 
         public async Task<ProductDTO> CreateAsync(ProductDTO productDto)
         {
-           var productEntity = _mapper.Map<Product>(productDto);
-           var createdProduct = await _productRepository.CreateProductAsync(productEntity);
-           return _mapper.Map<ProductDTO>(createdProduct);
+            var productEntity = _mapper.Map<Product>(productDto);
+
+            productEntity.CategoryId = productDto.CategoryId;
+
+            var createdProduct = await _productRepository.CreateProductAsync(productEntity);
+
+            return _mapper.Map<ProductDTO>(createdProduct);
+
         }
 
         public async Task<ProductDTO> DeleteAsync(int id)
