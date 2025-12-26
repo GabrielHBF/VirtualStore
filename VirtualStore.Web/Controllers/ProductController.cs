@@ -43,10 +43,58 @@ namespace VirtualStore.Web.Controllers
             }
             else
             {
-                ViewBag.Categories = new SelectList(await _categoryService.GetAllAsync(), "CategoryId", "Name");
+                ViewBag.CategoryId = new SelectList(await _categoryService.GetAllAsync(), "CategoryId", "Name");
             }
-            
+
             return View(productsViewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateProduct(int id)
+        {
+            ViewBag.CategoryId = new SelectList(await _categoryService.GetAllAsync(), "CategoryId", "Name");
+
+            var result = await _productService.GetByIdAsync(id);
+            if (result is null) return View("Error");
+
+            return View(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateProduct(ProductsViewModel productsViewModel)
+        {
+            ViewBag.CategoryId = new SelectList(await _categoryService.GetAllAsync(), "CategoryId", "Name");
+            if (ModelState.IsValid)
+            {
+                var result = await _productService.UpdateAsync(productsViewModel);
+                if (result is not null)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            return View(productsViewModel);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<ProductsViewModel>> DeleteProduct(int id)
+        {
+            var result = await _productService.GetByIdAsync(id);
+            if (result is null)
+            {
+                return RedirectToAction("Error");
+            }
+            return View(result);
+        }
+
+        [HttpPost, ActionName("DeleteProduct")]
+        public async Task<ActionResult> DeleteProductConfirmed(int id)
+        {
+            var result = await _productService.DeleteAsync(id);
+            if (result)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return View("Error");
         }
     }
 }

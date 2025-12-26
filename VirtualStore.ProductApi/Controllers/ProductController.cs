@@ -45,13 +45,9 @@ namespace VirtualStore.ProductApi.Controllers
             return new CreatedAtRouteResult("GetProductById", new { id = result.Id }, result);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<ProductDTO>> UpdateProduct(int id, [FromBody] ProductDTO productDTO)
-        {
-            if(productDTO is null || productDTO.Id != id)
-            {
-                return BadRequest(ModelState);
-            }
+        [HttpPut]
+        public async Task<ActionResult<ProductDTO>> UpdateProduct([FromBody] ProductDTO productDTO)
+        { 
             var result = await _productService.UpdateAsync(productDTO);
             return Ok(result);
         }

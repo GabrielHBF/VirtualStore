@@ -100,7 +100,7 @@ namespace VirtualStore.Web.Services.Services
            var client = _httpClientFactory.CreateClient("ProductApi");
            ProductsViewModel productUpdate = new ProductsViewModel();
 
-            using (var response =  await client.PutAsJsonAsync($"{endpoint}/{productsViewModel.Id}", productsViewModel))
+            using (var response =  await client.PutAsJsonAsync($"{endpoint}", productsViewModel))
             {
                 if (response.IsSuccessStatusCode)
                 {
